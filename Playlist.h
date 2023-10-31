@@ -19,7 +19,15 @@ class Playlist{
     public:
         Playlist(vector<Song*>&);
         // void addSongs(vector<Song*>&);
-        void sortSongs(int, bool);
+        enum Options{
+            Title = 1,
+            Artist = 2
+        };
+        enum OrderType{
+            Descending = 1,
+            Ascending = 2
+        };
+        void sortSongs(Options, OrderType);
         void displaySongs();
         
 };

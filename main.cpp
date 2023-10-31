@@ -88,7 +88,7 @@ void menu(int option, Playlist playlist){
         menu(choice,playlist);
         break;
     case 1:
-        playlist.sortSongs(1,1);
+        playlist.sortSongs(Playlist::Title,Playlist::Descending);
         cout << endl << "Playlist Ejemplo" << endl << endl;
         playlist.displaySongs();
         cout << endl << endl;
@@ -97,7 +97,7 @@ void menu(int option, Playlist playlist){
         menu(0,playlist);
         break;
     case 2:
-        playlist.sortSongs(2,1);
+        playlist.sortSongs(Playlist::Artist,Playlist::Descending);
         cout << endl << "Playlist Ejemplo" << endl << endl;
         playlist.displaySongs();
         cout << endl << endl;
@@ -109,7 +109,7 @@ void menu(int option, Playlist playlist){
         cout << "Ha salido exitosamente de la app.";
         break;
     case 101:
-        playlist.sortSongs(1,0);
+        playlist.sortSongs(Playlist::Title,Playlist::Ascending);
         cout << endl << "Playlist Ejemplo" << endl << endl;
         playlist.displaySongs();
         cout << endl << endl;
@@ -117,7 +117,7 @@ void menu(int option, Playlist playlist){
         menu(0,playlist);
         break;
     case 102:
-        playlist.sortSongs(2,0);
+        playlist.sortSongs(Playlist::Artist,Playlist::Ascending);
         cout << endl << "Playlist Ejemplo" << endl << endl;
         playlist.displaySongs();
         cout << endl << endl;
