@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Playlist::Playlist(vector<Song*>& songs) : playlist(songs){}
+Playlist::Playlist(deque<Song*>& songs) : playlist(songs){}
 
 string Playlist::lowercase(string word){
     transform(word.begin(), word.end(), word.begin(), ::tolower);

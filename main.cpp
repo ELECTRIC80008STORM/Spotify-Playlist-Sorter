@@ -3,7 +3,7 @@
 #include "readtype.h"
 
 #include <iostream>
-#include <vector>
+#include <deque>
 #include <chrono>
 #include <thread>
 
@@ -22,7 +22,7 @@ int choice;
 
 int main(){
     // Playlist de Ejemplo
-    vector<Song*> songs;
+    deque<Song*> songs;
     songs.push_back(new Song("When I Was Your Man", "Bruno Mars"));
     songs.push_back(new Song("Seven (feat. Latto) (Explicit Ver.)", "Jung Kook"));
     songs.push_back(new Song("bad idea right?", "Olivia Rodrigo"));
