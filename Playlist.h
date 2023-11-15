@@ -15,17 +15,25 @@ class Playlist{
         static bool titleComparisonDescending(Song*, Song*);
         static bool artistComparisonAscending(Song*, Song*);
         static bool artistComparisonDescending(Song*, Song*);
-        // TODO: Add sort functions for the rest of the attributes
+        static bool albumComparisonAscending(Song*, Song*);
+        static bool albumComparisonDescending(Song*, Song*);
+        static bool durationComparisonAscending(Song*, Song*);
+        static bool durationComparisonDescending(Song*, Song*);
+        static bool popularityComparisonAscending(Song*, Song*);
+        static bool popularityComparisonDescending(Song*, Song*);
 
     public:
         Playlist();
         enum Options{
             Title = 1,
-            Artist = 2
+            Artist = 2,
+            Album = 3,
+            Duration = 4,
+            Popularity = 5
         };
         enum OrderType{
-            Descending = 1,
-            Ascending = 2
+            Ascending = 1,
+            Descending = 2,
         };
         void enqueueTrackData(string);
         void sortSongs(Options, OrderType);

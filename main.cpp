@@ -18,6 +18,9 @@ int choiceValidation(int, int);
 // Declaración de variables globales
 string option1 = "Título ↓";
 string option2 = "Artista ↓";
+string option3 = "Álbum ↓";
+string option4 = "Duración ↓";
+string option5 = "Popularidad ↓";
 string playlistName;
 int choice;
 
@@ -68,31 +71,41 @@ void menu(int option, Playlist playlist){
 
         playlist.displaySongs();
         cout << endl << endl;
-        sleep_for(seconds(8));
+        // sleep_for(seconds(7));
         
         menu(0, playlist);
         break;
-    // TODO: Add the other sorting options
     // TODO: Add the option to change the playlist
     // TODO: Add the playlist method to store the previous data
     case 0:
         cout << "Organizar la playlist en base a: " << endl << endl;
-        cout << "1. " << option1 << "\n" << "2. " << option2 << endl << endl;
-        cout << "3. Salir de la aplicación" << endl << endl;
+        cout << "1. " << option1 << "\n2. " << option2 <<
+        "\n3. " << option3 << "\n4. " << option4 << "\n5. " << option5
+        << endl << endl;
+        cout << "6. Salir de la aplicación" << endl << endl;
         cout << "Selecciona el número de la opción que desees escoger: ";
-        choice = choiceValidation(1,3);
-        if(option1 != "Título ↓" && choice == 1){
+        choice = choiceValidation(1,6);
+        if(choice == 1 && option1 != "Título ↓"){
             choice = 101;
-        } else if(option2 != "Artista ↓" && choice == 2){
+        } else if(choice == 2 && option2 != "Artista ↓"){
             choice = 102;
+        } else if(choice == 3 && option3 != "Álbum ↓"){
+            choice = 103;
+        } else if(choice == 4 && option4 != "Duración ↓"){
+            choice = 104;
+        } else if(choice == 5 && option5 != "Popularidad ↓"){
+            choice = 105;
         }
         option1 = "Título ↓";
         option2 = "Artista ↓";
+        option3 = "Álbum ↓";
+        option4 = "Duración ↓";
+        option5 = "Popularidad ↓";
         printf("\e[1;1H\e[2J");
         menu(choice,playlist);
         break;
     case 1:
-        playlist.sortSongs(Playlist::Title,Playlist::Descending);
+        playlist.sortSongs(Playlist::Title,Playlist::Ascending);
         cout << endl << playlistName << endl << endl;
         playlist.displaySongs();
         cout << endl << endl;
@@ -101,7 +114,7 @@ void menu(int option, Playlist playlist){
         menu(0,playlist);
         break;
     case 2:
-        playlist.sortSongs(Playlist::Artist,Playlist::Descending);
+        playlist.sortSongs(Playlist::Artist,Playlist::Ascending);
         cout << endl << playlistName << endl << endl;
         playlist.displaySongs();
         cout << endl << endl;
@@ -110,10 +123,37 @@ void menu(int option, Playlist playlist){
         menu(0,playlist);
         break;
     case 3:
+        playlist.sortSongs(Playlist::Album,Playlist::Ascending);
+        cout << endl << playlistName << endl << endl;
+        playlist.displaySongs();
+        cout << endl << endl;
+        sleep_for(seconds(3));
+        option3 = "Álbum ↑";
+        menu(0,playlist);
+        break;
+    case 4:
+        playlist.sortSongs(Playlist::Duration,Playlist::Ascending);
+        cout << endl << playlistName << endl << endl;
+        playlist.displaySongs();
+        cout << endl << endl;
+        sleep_for(seconds(3));
+        option4 = "Duración ↑";
+        menu(0,playlist);
+        break;
+    case 5:
+        playlist.sortSongs(Playlist::Popularity,Playlist::Ascending);
+        cout << endl << playlistName << endl << endl;
+        playlist.displaySongs();
+        cout << endl << endl;
+        sleep_for(seconds(3));
+        option5 = "Popularidad ↑";
+        menu(0,playlist);
+        break;
+    case 6:
         cout << "Ha salido exitosamente de la app.";
         break;
     case 101:
-        playlist.sortSongs(Playlist::Title,Playlist::Ascending);
+        playlist.sortSongs(Playlist::Title,Playlist::Descending);
         cout << endl << playlistName << endl << endl;
         playlist.displaySongs();
         cout << endl << endl;
@@ -121,7 +161,31 @@ void menu(int option, Playlist playlist){
         menu(0,playlist);
         break;
     case 102:
-        playlist.sortSongs(Playlist::Artist,Playlist::Ascending);
+        playlist.sortSongs(Playlist::Artist,Playlist::Descending);
+        cout << endl << playlistName << endl << endl;
+        playlist.displaySongs();
+        cout << endl << endl;
+        sleep_for(seconds(3));
+        menu(0,playlist);
+        break;
+    case 103:
+        playlist.sortSongs(Playlist::Album,Playlist::Descending);
+        cout << endl << playlistName << endl << endl;
+        playlist.displaySongs();
+        cout << endl << endl;
+        sleep_for(seconds(3));
+        menu(0,playlist);
+        break;
+    case 104:
+        playlist.sortSongs(Playlist::Duration,Playlist::Descending);
+        cout << endl << playlistName << endl << endl;
+        playlist.displaySongs();
+        cout << endl << endl;
+        sleep_for(seconds(3));
+        menu(0,playlist);
+        break;
+    case 105:
+        playlist.sortSongs(Playlist::Popularity,Playlist::Descending);
         cout << endl << playlistName << endl << endl;
         playlist.displaySongs();
         cout << endl << endl;
