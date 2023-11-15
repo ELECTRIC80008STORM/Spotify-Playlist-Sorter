@@ -18,7 +18,6 @@ class Playlist{
 
     public:
         Playlist(deque<Song*>&);
-        // void addSongs(vector<Song*>&);
         enum Options{
             Title = 1,
             Artist = 2
