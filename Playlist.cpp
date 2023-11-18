@@ -22,9 +22,16 @@ vector<string> parseLine(const string& line) {
     string currentToken;
     bool insideQuotes = false;
 
-    for (char ch : line) {
+    tokens.reserve(5);
+
+    for (size_t i = 0; i < line.length(); ++i) {
+        char ch = line[i];
         if (ch == '"') {
-            insideQuotes = !insideQuotes;
+            if(insideQuotes && i + 1 < line.length() && line[i + 1] != ','){
+                currentToken += ch;
+            } else{
+                insideQuotes = !insideQuotes;
+            }
         } else if (ch == ',' && !insideQuotes) {
             currentToken = trim(currentToken);
             tokens.push_back(currentToken);
