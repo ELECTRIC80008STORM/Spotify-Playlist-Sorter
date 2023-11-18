@@ -1,3 +1,5 @@
+/* Spotify Playlist Sorter */
+
 #ifndef SONG
 #define SONG
 
@@ -5,6 +7,11 @@
 
 using namespace std;
 
+/*
+* Clase "Song"
+* Tiene los atributos que poseen las canciones y posee getters para
+* acceder a ellos.
+*/
 class Song{
     private:
         string title;
@@ -22,5 +29,6 @@ class Song{
         int getDuration(){ return duration; }
         int getPopularity(){ return popularity; }
 };
+
 
 #endif

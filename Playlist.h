@@ -1,3 +1,5 @@
+/* Spotify Playlist Sorter */
+
 #ifndef PLAYLIST
 #define PLAYLIST
 
@@ -7,6 +9,13 @@
 
 using namespace std;
 
+/*
+* Clase "Playlist"
+* Permite guardar las canciones en un deque nombrado "Playlist" y tiene los
+* métodos para ordenar las canciones, leer los archivos que contienen la 
+* información de las playlists y sobreescribir la información de esos
+* archivos cuando se requiera.
+*/
 class Playlist{
     private:
         deque<Song*> playlist;

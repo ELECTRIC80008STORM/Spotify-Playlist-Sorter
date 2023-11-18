@@ -1,3 +1,5 @@
+/* Spotify Playlist Sorter */
+
 #include "Playlist.cpp"
 #include "Song.h"
 #include "readtype.h"
@@ -54,6 +56,16 @@ int main(){
     return 0;
 };
 
+/**
+ * Muestra un menú interactivo y maneja las opciones del usuario para organizar y mostrar las listas de reproducción.
+ * Permite seleccionar y ordenar las listas de reproducción basadas en distintos criterios como título, artista, álbum,
+ * duración y popularidad. También proporciona opciones para seleccionar diferentes listas de reproducción y salir
+ * de la aplicación. Las operaciones de ordenamiento pueden ser ascendentes o descendentes.
+ *
+ * @param int option: El número de la opción seleccionada en el menú.
+ * @param Playlist playlist: La lista de reproducción que se está manejando.
+ * @return
+ */
 void menu(int option, Playlist playlist){
     switch (option){
     case 100:
@@ -202,6 +214,14 @@ void menu(int option, Playlist playlist){
     }
 }
 
+/**
+ * Valida que la elección del usuario esté dentro de un rango especificado y lo mantiene en un bucle
+ * hasta que su respuesta cumple con lo solicitado.
+ *
+ * @param int lowerLimit: El límite inferior del rango de elección válido.
+ * @param int upperLimit: El límite superior del rango de elección válido.
+ * @return int: La elección validada del usuario dentro del rango especificado.
+ */
 int choiceValidation(int lowerLimit, int upperLimit){
     int choice;
     choice = ReadType<int>("");
