@@ -38,7 +38,7 @@ class Playlist{
         void enqueueTrackData(string);
         void sortSongs(Options, OrderType);
         void displaySongs();
-        void storeTrackData();
+        void storeTrackData(string);
 };
 
 

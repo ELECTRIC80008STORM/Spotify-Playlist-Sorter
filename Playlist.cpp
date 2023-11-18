@@ -8,7 +8,15 @@ using namespace std;
 
 Playlist::Playlist(){}
 
-// Analyze for further comprehension
+string trim(const string& str) {
+    size_t first = str.find_first_not_of(' ');
+    if (string::npos == first) {
+        return str;
+    }
+    size_t last = str.find_last_not_of(' ');
+    return str.substr(first, (last - first + 1));
+}
+
 vector<string> parseLine(const string& line) {
     vector<string> tokens;
     string currentToken;
@@ -18,6 +26,7 @@ vector<string> parseLine(const string& line) {
         if (ch == '"') {
             insideQuotes = !insideQuotes;
         } else if (ch == ',' && !insideQuotes) {
+            currentToken = trim(currentToken);
             tokens.push_back(currentToken);
             currentToken.clear();
         } else {
@@ -25,22 +34,13 @@ vector<string> parseLine(const string& line) {
         }
     }
     if (!currentToken.empty()) {
+        currentToken = trim(currentToken);
         tokens.push_back(currentToken);
     }
 
     return tokens;
 }
 
-string trimQuotes(const string& str) {
-    size_t firstQuote = str.find('"');
-    size_t lastQuote = str.rfind('"');
-    if (firstQuote != string::npos && lastQuote != string::npos && firstQuote != lastQuote) {
-        return str.substr(firstQuote + 1, lastQuote - firstQuote - 1);
-    }
-    return str;
-}
-
-// Analyze for improvements
 void Playlist::enqueueTrackData(string file){
     ifstream ReadFile(file);
     string line;
@@ -57,11 +57,11 @@ void Playlist::enqueueTrackData(string file){
             continue; // Skip this line
         }
 
-        string track = trimQuotes(tokens[0]);
-        string artist = trimQuotes(tokens[1]);
-        string album = trimQuotes(tokens[2]);
-        int duration = stoi(trimQuotes(tokens[3]));
-        int popularity = stoi(trimQuotes(tokens[4]));
+        string track = tokens[0];
+        string artist = tokens[1];
+        string album = tokens[2];
+        int duration = stoi(tokens[3]);
+        int popularity = stoi(tokens[4]);
 
         playlist.push_back(new Song(track, artist, album, duration, popularity));
     }
@@ -215,6 +215,34 @@ void Playlist::displaySongs(){
     }
 }
 
-void Playlist::storeTrackData(){ // TODO: Declare the storeTrackData method
+void Playlist::storeTrackData(string originalFile){
+    string tempFile = originalFile + ".tmp";
+    ofstream playlistFile(tempFile);
 
+    if (!playlistFile.is_open()) {
+        cout << "The file didn't open successfully\n";
+        return;
+    }
+
+    for (const auto &element : playlist) {
+        playlistFile << "\"" << element->getTitle() << "\", "
+                     << "\"" << element->getArtist() << "\", "
+                     << "\"" << element->getAlbum() << "\", "
+                     << "\"" << element->getDuration() << "\", "
+                     << "\"" << element->getPopularity() << "\n";
+    }
+
+    playlistFile.close();
+
+    if (!playlistFile.good()) {
+        remove(tempFile.c_str());
+    }
+
+    if (remove(originalFile.c_str()) != 0) {
+        remove(tempFile.c_str());
+    }
+
+    rename(tempFile.c_str(), originalFile.c_str());
+
+    playlist.clear();
 }

@@ -22,6 +22,7 @@ string option3 = "Álbum ↓";
 string option4 = "Duración ↓";
 string option5 = "Popularidad ↓";
 string playlistName;
+string fileName;
 int choice;
 
 int main(){ // TODO: Reactivate the delays
@@ -75,16 +76,15 @@ void menu(int option, Playlist playlist){
         
         menu(0, playlist);
         break;
-    // TODO: Add the option to change the playlist
-    // TODO: Add the playlist method to store the previous data
     case 0:
         cout << "Organizar la playlist en base a: " << endl << endl;
         cout << "1. " << option1 << "\n2. " << option2 <<
         "\n3. " << option3 << "\n4. " << option4 << "\n5. " << option5
         << endl << endl;
-        cout << "6. Salir de la aplicación" << endl << endl;
+        cout << "6. Seleccionar otra playlist" << endl;
+        cout << "7. Salir de la aplicación" << endl << endl;
         cout << "Selecciona el número de la opción que desees escoger: ";
-        choice = choiceValidation(1,6);
+        choice = choiceValidation(1,7);
         if(choice == 1 && option1 != "Título ↓"){
             choice = 101;
         } else if(choice == 2 && option2 != "Artista ↓"){
@@ -150,6 +150,11 @@ void menu(int option, Playlist playlist){
         menu(0,playlist);
         break;
     case 6:
+        fileName = playlistName + " Playlist.csv";
+        playlist.storeTrackData(fileName);
+        menu(100,playlist);
+        break;
+    case 7:
         cout << "Ha salido exitosamente de la app.";
         break;
     case 101:
