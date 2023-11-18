@@ -323,21 +323,21 @@ void Playlist::sortSongs(Options optionChosen, OrderType orderChosen){
         }
     } else if(optionChosen == Options::Album){
         if(orderChosen == OrderType::Ascending){
-            sort(playlist.begin(), playlist.end(),artistComparisonAscending);
+            sort(playlist.begin(), playlist.end(),albumComparisonAscending);
         } else if(orderChosen == OrderType::Descending){
-            sort(playlist.begin(), playlist.end(),artistComparisonDescending);
+            sort(playlist.begin(), playlist.end(),albumComparisonDescending);
         }
     } else if(optionChosen == Options::Duration){
         if(orderChosen == OrderType::Ascending){
-            sort(playlist.begin(), playlist.end(),artistComparisonAscending);
+            sort(playlist.begin(), playlist.end(),durationComparisonAscending);
         } else if(orderChosen == OrderType::Descending){
-            sort(playlist.begin(), playlist.end(),artistComparisonDescending);
+            sort(playlist.begin(), playlist.end(),durationComparisonDescending);
         }
     } else if(optionChosen == Options::Popularity){
         if(orderChosen == OrderType::Ascending){
-            sort(playlist.begin(), playlist.end(),artistComparisonAscending);
+            sort(playlist.begin(), playlist.end(),popularityComparisonAscending);
         } else if(orderChosen == OrderType::Descending){
-            sort(playlist.begin(), playlist.end(),artistComparisonDescending);
+            sort(playlist.begin(), playlist.end(),popularityComparisonDescending);
         }
     }
 }
