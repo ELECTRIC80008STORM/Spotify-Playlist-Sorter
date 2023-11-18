@@ -25,19 +25,19 @@ string playlistName;
 string fileName;
 int choice;
 
-int main(){ // TODO: Reactivate the delays
+int main(){
     Playlist playlist;
 
     // Introducción al programa
     printf("\e[1;1H\e[2J");
     cout << "Spotify Playlist Sorter" << endl << endl;
 
-    // sleep_for(seconds(2));
+    sleep_for(seconds(2));
 
     cout << "Bienvenido/a\n" "Preparate para poder organizar tus playlist como llevas"
     " tiempo queriendo!!!" << endl << endl;
 
-    // sleep_for(seconds(3));
+    sleep_for(seconds(3));
 
     cout << "Por el momento la aplicación sigue en desarrollo, por lo que solo podrás"
     " ordenar" << endl << "playlists de ejemplo, esperamos que"
@@ -46,7 +46,7 @@ int main(){ // TODO: Reactivate the delays
 
     cout << endl << endl;
 
-    // sleep_for(seconds(7));
+    sleep_for(seconds(7));
     printf("\e[1;1H\e[2J");
 
     menu(100, playlist);
@@ -72,7 +72,7 @@ void menu(int option, Playlist playlist){
 
         playlist.displaySongs();
         cout << endl << endl;
-        // sleep_for(seconds(7));
+        sleep_for(seconds(7));
         
         menu(0, playlist);
         break;
@@ -155,6 +155,8 @@ void menu(int option, Playlist playlist){
         menu(100,playlist);
         break;
     case 7:
+        fileName = playlistName + " Playlist.csv";
+        playlist.storeTrackData(fileName);
         cout << "Ha salido exitosamente de la app.";
         break;
     case 101:
