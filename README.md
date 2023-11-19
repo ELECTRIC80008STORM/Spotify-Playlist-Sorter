@@ -30,6 +30,98 @@ La estructura de datos utilizada en este programa es una “double-ended queue�
 
 La ventaja de usar esta estructura en este proyecto concreto se da debido a que ofrece un rendimiento similar al de un vector mientras ofrece una mayor rapidez para la inserción o eliminación de elementos. Si bien actualmente no se requieren ninguna de estas dos una vez se llena la estructura, estás operaciones si serán necesarias una vez se logré conectar la aplicación a los servidores de Spotify, pues cada cierto tiempo se actualizarán los datos guardados para añadir o eliminar cualquier canción en caso de que el usuario pudiera haber modificado su playlist. Dado que no se requerirá un acceso aleatorio a los datos en ningún proceso de la app, esto nos asegura que siempre nos mantendremos en el mejor de los casos, es decir, en una complejidad de O(1).
 
+### Métodos Clave (o con mayor impacto) del Archivo Playlist.cpp
+
+#### trim(const string& str)
+Esta función recibe una string y elimina los espacios en blanco que posea. Utiliza las funciones públicas de los strings llamadas “find_first_not_of()” y “find_last_not_of()” las cuales recorren toda la string en busca del primer o último elemento que no sea igual al parámetro que se les dió. Por lo tanto su complejidad es la siguiente:
+
+**Complejidad Temporal:**
+- Ω(1) en el caso de que el primer y último carácter no sean un espacio en blanco.
+- Θ(n) en el caso de que el carácter se encuentre en medio de la string.
+- O(n) en caso de que no haya espacios en blanco o se encuentren en medio de la string.
+
+**Complejidad Espacial:**
+- O(n) por tratarse de una string.
+
+#### parseLine(const string& line)
+Esta función recibe una string con la línea a la que se le dará el formato correcto. Se van almacenando “tokens” que son los carácteres pertenecientes a los atributos, una vez se obtuvieron todos los carácteres de un token, el token se recorta mediante la función “trim()” para eliminar cualquier espacio blanco, está función recorre todo la string del token, después el token es almacenado en un vector “tokens”. Debemos tener en cuenta que se utiliza una función que incluye un ciclo dentro de nuestro ciclo principal y que está solo se utiliza una cantidad limitada de veces dentro del programa para poder comprender su complejidad temporal. Tomaremos **n** como la cantidad de caracteres a recorrer en el ciclo for principal, **k** como la cantidad total de tokens y **m** como la longitud del token. Nuestra complejidad la podemos analizar de la siguiente manera, (n + k*m), donde **m** siempre será menor a **n** debido a que los tokens son una substring de la línea. En términos de clasificación del análisis asintótico siguiendo la notación “Big O”, la complejidad será la siguiente:
+
+**Complejidad Temporal:**
+- Ω(n) este caso se daría en el mejor caso de trim (Ω(1)), dando una complejidad total de Ω(n + k).
+- Θ(n)
+- O(n)
+
+**Complejidad Espacial:**
+- O(n) por depender mayormente del tamaño de la string dada.
+
+#### Playlist::enqueueTrackData(string file)
+Esta función recibe una string con el nombre del archivo del cuál leerá los datos guardados de las canciones de esa playlist, estos incluyen los atributos título, artista, álbum, duración y popularidad de las canciones. Por cada línea llama a la función “parseLine()” con la cuál obtiene los datos y les da el formato correcto, está función tiene una complejidad lineal respecto al tamaño de la línea. Una vez lee los datos los guarda en un deque “playlist”. Dado que depende de la cantidad de canciones guardadas en la playlist, su complejidad es la siguiente:
+
+**Complejidad Temporal:**
+- Ω(n) por la naturaleza del programa el archivo jamás estará vacío.
+- Θ(n)
+- O(n)
+
+**Complejidad Espacial:**
+- O(n) dependiendo de la cantidad de canciones registradas.
+
+#### Playlist::lowercase(string word)
+Esta función recibe una string la cuál es recorrida mediante la función “transform” de la string. Al pasar por cada carácter en el que sea posible lo convierte en minúsculas. Dado que siempre recorrerá la string completa independientemente de la misma, su complejidad será la siguiente:
+
+**Complejidad Temporal:**
+- Ω(n)
+- Θ(n)
+- O(n)
+
+**Complejidad Espacial:**
+- O(n) por tratarse de una string.
+
+#### Playlist::displaySongs()
+Esta función recorrerá el deque “playlist” completo imprimiendo el título, artista/s y álbum de todas las canciones contenidas en la playlist. Por la naturaleza del programa el deque jamás estará vacío, por lo tanto su complejidad es la siguiente:
+
+**Complejidad Temporal:**
+- Ω(n)
+- Θ(n)
+- O(n)
+
+**Complejidad Espacial:**
+- O(1) dado que solo se están imprimiendo los datos, cosa que no consume memoria adicional.
+
+#### Playlist::storeTrackData(string originalFile)
+Esta función recibe una string con el nombre del archivo en el cuál guardará los datos contenidos en el deque “playlist”. Crea un archivo temporal en el cuál ingresa todos los datos guardados, una vez finaliza de ingresar los datos el archivo temporal reemplaza al archivo original manteniendo el nombre del original. Dado que depende de los datos guardados en el deque, su complejidad temporal será la siguiente.
+
+**Complejidad Temporal:**
+- Ω(n) por la naturaleza del programa el deque jamás estará vacío.
+- Θ(n)
+- O(n)
+
+**Complejidad Espacial:**
+- O(1) siempre y cuando solo consideremos el espacio utilizado en la memoria RAM.
+
+### Métodos Clave (o con mayor impacto) del Archivo main.cpp
+
+#### choiceValidation(int lowerLimit, int upperLimit)
+Esta función recibe los límites que se le impondrán al usuario para su respuesta, y siempre que el usuario responda fuera de estos o con algún carácter no aceptable, se le mantendrá en un bucle hasta que responda correctamente.
+
+**Complejidad Temporal:**
+- Ω(1) en el caso de que el usuario ingrese a la primera un valor aceptable.
+- Θ(1) en el mismo caso que arriba, dado que sería el caso más probable en el programa.
+- O(n) en caso de que el usuario ingrese un valor no aceptable repetidamente.
+
+**Complejidad Espacial:**
+- O(1) debido a que la función ocupa una cantidad fija de variables.
+
+### Complejidad Final del Programa
+
+Dado que el programa es secuencial, es decir, ninguna función es llamada de manera recursiva, podemos obtener la complejidad final sumando las complejidades de sus componentes. Siempre que inicie el programa el usuario tendrá que elegir una playlist que desee ordenar, por lo que se llamará la función “enqueueTrackData()” la cuál posee una complejidad de **n** para todos los casos, después se le dará opciones de ordenar la playlist, escoger otra playlist o salirse de la aplicación, en el primer escenario en el que escoja ordenar una playlist se usará la función “sort()” de la librería estándar de C++, está función tiene una complejidad de (n log n) para todos los casos, una vez ordenada podrá elegir reordenarla, cambiar de playlist o salirse, independientemente de si ocurre el segundo o tercer escenario, la función “storeTrackData()” se llamará para guardar el último estado de la playlist (cualquier cambió en el orden de las canciones), el segundo escenario luego volverá a dar la opción de elegir una playlist por lo que se repite el flujo inicial, el único escenario que finaliza la aplicación es el tercero, y los dos primeros escenarios tarde o temprano conducen al tercer escenario. La complejidad total del programa será la siguiente:
+
+**Complejidad Temporal:**
+- Ω(n) en el caso de que el usuario decida salirse de la aplicación inmediatamente después de seleccionar una playlist.
+- Θ(n log n) esté será el caso más común en donde el usuario decide ordenar la playlist y eventualmente se sale.
+- O(n log n) esté será el caso en el que el usuario reordene las playlists disponibles varias veces antes de salirse.
+
+**Complejidad Espacial:**
+- O(n) dada por el uso del deque para almacenar las canciones.
 
 ## Nota
 
