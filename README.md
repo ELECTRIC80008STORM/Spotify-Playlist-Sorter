@@ -1,6 +1,6 @@
 # Spotify Playlist Sorter
 
-Organiza tus playlist por títulos, artistas y de muchas formas más.
+Organiza tus playlist por título, artistas y de muchas formas más.
 
 Este proyecto busca emular el sistema de ordenamiento de las canciones en Spotify, permitiéndote ordenar las canciones de una forma más sencilla y rápida, todo esto para que puedas personalizar tus playlists como tu desees.
 
@@ -12,6 +12,18 @@ Spotify te limita a solo ciertas opciones para organizar tus playlists, sin emba
 - **Título**
 
 - **Artista**
+
+- **Álbum**
+
+- **Duración**
+
+- **Popularidad**
+
+---
+
+[Ir a la sección de correciones](#correcciones)
+
+---
 
 ## Análisis de Complejidad / Análisis Asintótico
 
@@ -123,10 +135,78 @@ Dado que el programa es secuencial, es decir, ninguna función es llamada de man
 **Complejidad Espacial:**
 - O(n) dada por el uso del deque para almacenar las canciones.
 
+
+## Correcciones
+
+### SICT0301: Evalúa los componentes
+
+#### Hace un análisis de complejidad correcto y completo todas las estructuras de datos y cada uno de sus usos en el programa.
+
+Se añadió una sección en el README con el análisis asintótico de la estructura de datos Double-Ended Queue y su uso en el programa. [Ir a la sección.](#double-ended-queue)
+
+#### Hace un análisis de complejidad correcto y completo para todos los demás componentes del programa y determina la complejidad final del programa.
+
+Se añadió una sección en el README con el análisis asintótico de las funciones con mayor impacto en la complejidad al igual que el análisis asintótico final del programa. [Ir a la sección.](#métodos-clave-o-con-mayor-impacto-del-archivo-playlistcpp)
+
+### SICT0302: Toma decisiones
+
+#### Selecciona una estructura de datos adecuada al problema y lo usa correctamente.
+
+Se sustituyó el uso del vector por la double-ended queue incluida en una STL (Standard Template Library). Es usada como un atributo de la clase Playlist para guardar las canciones que se extraen de los archivos. La explicación de su utilidad en el proyecto puede ser encontrada en el análisis asintótico.
+
+**Usado en:**
+- Archivo “Playlist.h”, línea 21.
+- Archivo “Playlist.cpp”, líneas 104,  311, 352 y 375.
+
+### SICT0303: Implementa acciones científicas
+
+#### Implementa mecanismos para consultar información de las estructuras correctas.
+
+El mecanismo implementado para poder consultar la información del double-ended queue es el método “displaySongs()” de la clase Playlist.
+
+**Declaración del método:**
+- Archivo “Playlist.h”, línea 49.
+
+**Definición del método:**
+- Archivo “Playlist.cpp”, línea 351.
+
+**Usado en:**
+- Archivo “main.cpp”, su uso se da a lo largo de las interacciones de usuario con el menú el cuál es definido en la línea 69.
+
+#### Implementa mecanismos de lectura de archivos para cargar datos a las estructuras de manera correcta.
+
+El mecanismo implementado para poder realizar la lectura de archivos es el método “enqueueTrackData()” de la clase Playlist. Este método se apoya de las funciones “trim()” y “parseLine()” para poder darle el formato correcto a la información leída y que pueda ser de utilidad.
+
+**Declaración del método:**
+- Archivo “Playlist.h”, línea 47.
+
+**Definición del método y de las funciones auxiliares:**
+- Archivo “Playlist.cpp”, línea 25 (trim).
+- Archivo “Playlist.cpp”, línea 42 (parseLine).
+- Archivo “Playlist.cpp”, línea 82 (enqueueTrackData, en dónde se realiza la lectura de archivos).
+
+**Usado en:**
+- Archivo “main.cpp”, su uso se da a lo largo de las interacciones de usuario con el menú el cuál es definido en la línea 69.
+
+#### Implementa mecanismos de escritura de archivos para guardar los datos de las estructuras de manera correcta.
+
+El mecanismo implementado para poder realizar escritura de archivos es el método “storeTrackData()” de la clase Playlist.
+
+**Declaración del método:**
+- Archivo “Playlist.h”, línea 50.
+
+**Definición del método:**
+- Archivo “Playlist.cpp”, línea 366.
+
+**Usado en:**
+- Archivo “main.cpp”, su uso se da a lo largo de las interacciones de usuario con el menú el cuál es definido en la línea 69.
+
+
 ## Nota
 
 - En un futuro se permitirá la extracción de tus propias playlists una vez ingreses con tu cuenta de Spotify.
 - También se añadirán nuevas maneras de organizar las canciones de tus playlists e incluso, quizás la opción de crear una nueva playlist con las canciones ordenadas en la nueva forma que elegiste.
+
 
 ## Agradecimientos
 
